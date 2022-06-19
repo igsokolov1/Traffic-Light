@@ -22,18 +22,17 @@ class ViewController: UIViewController {
         lightYellow.alpha = 0.3
         lightGreen.layer.cornerRadius = 30.5
         lightGreen.alpha = 0.3
+        trafficLightButton.configuration = setupButton(with: "Start")
         trafficLightButton.layer.cornerRadius = 10
     }
-
-   
+    
     @IBAction func trafficLightButtonTapped(_ sender: UIButton) {
-        
-        print("1")
         
         if lightRed.alpha == lightYellow.alpha &&
             lightGreen.alpha == lightYellow.alpha {
             
             lightRed.alpha = 1
+            trafficLightButton.configuration = setupButton(with: "Next")
             
         } else if lightRed.alpha == 1 {
             
@@ -50,11 +49,15 @@ class ViewController: UIViewController {
             lightGreen.alpha = 0.3
             lightRed.alpha = 1
             }
-        
-        trafficLightButton.setTitle(
-            lightRed.alpha == 0.3 ? "Start" : "Next",
-            for: .normal
-        )
     }
+    
+    private func setupButton(with title: String) -> UIButton.Configuration {
+        var buttonConfiguration = UIButton.Configuration.filled()
+        buttonConfiguration.baseBackgroundColor = #colorLiteral(red: 0, green: 0.4509928823, blue: 1, alpha: 1)
+        buttonConfiguration.title = title
+        buttonConfiguration.attributedTitle?.font = UIFont.systemFont(ofSize: 24)
+        return buttonConfiguration
+    }
+     
 }
 
